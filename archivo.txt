@@ -1,0 +1,88 @@
+mi_casa.Initialize(Home{
+
+   PortA => Enable(); 
+
+   # Declaraciones
+	
+   Float y = 1;
+   Int x = 5;
+   Text msj = 'hola';
+	
+	
+   Int a = 3;
+   Int b = 5;
+   Int Resultado;
+
+   # Expresiones
+
+   Resultado = 5 + 5.1;
+   #Resultado = a + c;
+   #Resultado = d + b;
+   #r = a + b;
+
+   # Resto del programa
+
+   Obj temper = New Temp(PortA(0)); 
+
+   Obj aire = New Ac(PortA(1)); 
+   
+   Obj ventana = New Window(PortA(2)); 
+
+   Int temperatura = 35;
+   Int emperatura_max = 36;
+
+   If(temper >= 40){ 
+   		aire.Set(tempeatura); 
+   }
+
+   If(aire.IsOn()){ 
+    	ventana.Close(); 
+	}
+
+   Int temperatura = 20;
+   Text mensaje_ac = 'Recalibrando temperatura';
+   Int temperatura_max = 38;
+
+   Display aire; 
+
+   Obj foco_cuarto = New LightRGB(PortA(3));   
+
+   foco_cuarto.Program('20:00', This.On(), 'Daily');  
+   foco_cuarto.Program('20:00', This.LightMode(0), 'Daily');   
+   foco_cuarto.Program('20:00', This.Color('white'), 'Daily');  
+   foco_cuarto.Program('22:00', This.LightMode(1), 'Once');  
+
+   Obj foco_entrada = New Light(PortA(4)); 
+
+   foco_entrada.Program('20:00', This.On(), 'Daily'); 
+   foco_entrada.Program('7:00', This.Off(), 'Daily'); 
+
+   Obj puerta_principal = New Door(PortA(5));
+
+   puerta_principal.Program('11:00', This.Unlock(),'Daily'); 
+
+   puerta_principal.Program('11:30', This.Lock(),'Daily'); 
+	
+   Int angulo_camara1 = 45;
+   Int angulo_camara2 = 30;	
+
+   Obj camara_entrada1 = New Camera(PortA(6));
+   Obj camara_entrada2 = New Camera(PortA(7)); 
+
+   Text mensaje_puerta = 'abierto';
+
+   Obj camara_puerta = New SmartCamera(PortA(8)); 
+   
+   Int angulo_camara = 45;
+
+   camara_entrada2.Move('right'); 
+   camara_entrada1.Move('up'); 
+   
+
+   If(puerta_principal.Doorbell()){ 
+		foco_entrada.On();  
+       puerta_principal.Open();
+		camara_entrada2.Move('left'); 
+		camara_entrada1.Move('down');
+	}
+});
